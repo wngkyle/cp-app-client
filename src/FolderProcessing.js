@@ -59,7 +59,7 @@ export default function FolderProcessing() {
                     withCredentials: false,
                     cancelToken: cancelToken.current.token
                 })
-                console.log('Result:', result);
+                console.log('Result:', result.data);
             } catch(thrown) {
                 if (axios.isCancel(thrown)) {
                     console.log('Request Cancelled:', thrown.message);

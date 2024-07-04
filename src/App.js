@@ -14,6 +14,8 @@ import { ColumnStepProvider } from './context/ColumnStepContext.js';
 import { FastTrackContextProvider } from './context/FastTrackContext.js';
 import { ColumnRangeProvider } from './context/ColumnRangeContext.js';
 
+// import SplineHome from './SplineHome.js';
+
 export default function App() {
   return (
     <>
