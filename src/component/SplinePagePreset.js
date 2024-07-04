@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { animated, useTrail } from '@react-spring/web';
-import './css/SplinePagePreset2.css';
+import './css/SplinePagePreset.css';
 
 export default function PagePreset2({ children }) {
     const lineRef = useRef(null);

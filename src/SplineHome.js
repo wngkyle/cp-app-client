@@ -47,13 +47,13 @@ export default function Home() {
         <>
             <PagePreset2>
                 <div className="homeContainer">
-                    <div className="helloTextContainer">
+                    {/* <div className="helloTextContainer">
                         <Title>
                             <span>Hello and</span>
                             <span>Welcome to CP App</span>
                             <span>To CP App</span>
                         </Title>
-                    </div>
+                    </div> */}
                 </div>
             </PagePreset2>
         </>
