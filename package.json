@@ -65,7 +65,8 @@
       "icon": "./public/icon.icns"
     },
     "win": {
-      "icon": "./public/favicon3.ico"
+      "target": "nsis",
+      "icon": "./public/favicon.ico"
     },
     "linux": {
       "icon": "./public/logo512.png"
