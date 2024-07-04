@@ -51,12 +51,26 @@ const showFilesInCurrentDirectory = (cwd) => {
 }
 
 const flaskServer = (currentWorkingDirectory) => { 
+    let scriptPath;
     if (!app.isPackaged) {
-        const scriptPath = `${path.join(currentWorkingDirectory, './../../server/server.py')}`;
-        pythonProcess = spawn('python3', [scriptPath]);
-        console.log('Using Spawn() method...');
+        if (process.platform === 'win32') {
+            scriptPath = 'C:/Users/f0793/Desktop/cp-app-server/server.py';
+            pythonProcess = spawn('python', [scriptPath]);
+            console.log('Win32 : Using Spawn() method...');
+        } else {
+            scriptPath = `${path.join(currentWorkingDirectory, './../../server/server.py')}`;
+            pythonProcess = spawn('python3', [scriptPath]);
+            console.log('Darwin : Using Spawn() method...');
+        }
+        
     } else {
-        const scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`; 
+        if (process.platform === 'win32') {
+            scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`;
+            console.log('Win32 : Using ExecFile() method...');
+        } else {
+            scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`;
+            console.log('Darwin : Using ExecFile() method...');
+        }
         pythonProcess = execFile(scriptPath, { windowsHide: true }, (err, stdout, stderr) => {
             if (err) {
                 console.error(`Failed to start Flask server: ${err}`);
@@ -65,8 +79,6 @@ const flaskServer = (currentWorkingDirectory) => {
             console.log(`Flask stdout: ${stdout}`);
             console.error(`Flask stderr: ${stderr}`);
         });
-
-        console.log('Using ExecFile() method...');
     }
     return pythonProcess;
 }

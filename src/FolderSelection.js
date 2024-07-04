@@ -137,6 +137,9 @@ export default function FolderSelection() {
                 clearInterval(intervalID);
             }
         }, 5000);
+        return () => {
+            clearInterval(intervalID);
+        }
     }, [])
     // By passing an empty dependency array, the useEffect() will only run after initial render
     // Passing no dependency array at all, the useEffect() will run after every single render
@@ -194,7 +197,7 @@ export default function FolderSelection() {
     
     return (
         <>
-            {currWorkDirect === '' ? <Loading /> : renderFolderSelectionPage()}
+            {currWorkDirect === '' ? renderFolderSelectionPage() : renderFolderSelectionPage()}
         </>
     );
 };
