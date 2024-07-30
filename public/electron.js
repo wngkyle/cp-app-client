@@ -7,7 +7,7 @@ import { execFile, spawn } from 'child_process';
 import { readdirSync } from 'fs';
 
 let mainWindow = null;
-var pythonProcess;
+let pythonProcess;
 
 /*
 Another way of executing python script from javascript: 
