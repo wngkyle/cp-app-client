@@ -31,6 +31,8 @@
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-pack": "electron-builder -c.extraMetadata.main=build/electron.js",
+    "electron-pack-mac": "electron-builder --mac",
+    "electron-pack-win": "electron-builder --win --x64",
     "preelectron-pack": "react-scripts build",
     "start-server": "python3 ./../server/server.py"
   },

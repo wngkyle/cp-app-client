@@ -52,22 +52,21 @@ const showFilesInCurrentDirectory = (cwd) => {
 
 const flaskServer = (currentWorkingDirectory) => { 
     let scriptPath;
-    if (!app.isPackaged) {
-        if (process.platform === 'win32') {
+    if (!app.isPackaged) { // Development Mode
+        if (process.platform === 'win32') { // Windows 
             scriptPath = 'C:/Users/f0793/Desktop/cp-app-server/server.py';
             pythonProcess = spawn('python', [scriptPath]);
             console.log('Win32 : Using Spawn() method...');
-        } else {
+        } else { // Mac
             scriptPath = `${path.join(currentWorkingDirectory, './../../server/server.py')}`;
             pythonProcess = spawn('python3', [scriptPath]);
             console.log('Darwin : Using Spawn() method...');
-        }
-        
-    } else {
-        if (process.platform === 'win32') {
+        } 
+    } else { // Packaged 
+        if (process.platform === 'win32') { // Windows
             scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`;
             console.log('Win32 : Using ExecFile() method...');
-        } else {
+        } else { // Mac
             scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`;
             console.log('Darwin : Using ExecFile() method...');
         }
@@ -121,17 +120,19 @@ app.on('activate', () => {
 });
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        pythonProcess.kill();
-        app.quit();
-    }
-    console.log("Finished");
+    // if (process.platform !== 'darwin') {}
+    console.log('Process PID:', pythonProcess.pid);
+    pythonProcess.kill();
+    console.log("Killed in window-all-closed");
+    app.quit();
 });
 
 app.on('quit', () => {
     // Kill Flask server on app quit
     if (pythonProcess) {
+        console.log('Process PID:', pythonProcess.pid);
         pythonProcess.kill();
+        console.log("Killed in quit");
     }
 });
 

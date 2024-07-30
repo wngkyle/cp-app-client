@@ -197,7 +197,7 @@ export default function FolderSelection() {
     
     return (
         <>
-            {currWorkDirect === '' ? renderFolderSelectionPage() : renderFolderSelectionPage()}
+            {currWorkDirect === '' ? <Loading /> : renderFolderSelectionPage()}
         </>
     );
 };
