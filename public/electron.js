@@ -46,6 +46,17 @@ const showAppPath = () => {
     });
 }
 
+const showProcessResourcesPath = () => {
+    const currProcessPath = process.resourcesPath;
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Current Process Resources Path',
+        message: currProcessPath,
+    }).then(result => {
+        console.log('Message Box Result:', result);
+    });
+}
+
 const showFilesInCurrentDirectory = (cwd) => {
     const listOfFiles = readdirSync(cwd);
     let temp = '';
@@ -73,15 +84,15 @@ const showDialog = (text) => {
 
 const flaskServer = (currentWorkingDirectory) => { 
     let scriptPath;
-    showAppPath();
+    // showAppPath(); // Show App Path
+    // showProcessResourcesPath(); // Show Process Path
     if (app.isPackaged) { // Packaged
         if (process.platform === 'win32') { // Windows
-            // scriptPath = `${path.join(process.resourcesPath, 'server-dist-windows', 'server.exe')}`;
-            showDialog("Packaged Windows");
-            scriptPath = `${path.join(app.getAppPath(), 'win-unpacked', 'resources', 'server-dist-windows', 'server.exe')}`;
+            // showDialog("Packaged Windows");
+            scriptPath = `${path.join(process.resourcesPath, 'server-dist-windows', 'server.exe')}`;
             console.log('Win32 : Using ExecFile() method...');
         } else { // Mac
-            showDialog("Packaged Mac");
+            // showDialog("Packaged Mac");
             scriptPath = `${path.join(process.resourcesPath, 'server-dist-mac', 'server')}`;
             console.log('Darwin : Using ExecFile() method...');
         }
@@ -95,12 +106,12 @@ const flaskServer = (currentWorkingDirectory) => {
         });
     } else { // Development Mode 
         if (process.platform === 'win32') { // Windows 
-            showDialog("Development Windows");
+            // showDialog("Development Windows");
             scriptPath = 'C:/Users/f0793/Desktop/cp-app-server/server.py';
             pythonProcess = spawn('python', [scriptPath]);
             console.log('Win32 : Using Spawn() method...');
         } else { // Mac
-            showDialog("Development Mac");
+            // showDialog("Development Mac");
             scriptPath = `${path.join(currentWorkingDirectory, './../../server/server.py')}`;
             pythonProcess = spawn('python3', [scriptPath]);
             console.log('Darwin : Using Spawn() method...');
