@@ -1,12 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import logo from './../assets/bright-toward-logo.png';
 import './css/PagePreset.css';
 
 export default function PagePreset({ children }) {
     const navigate = useNavigate();
 
-    const handleLogoPressed = () => {
+    const handleLogoPressed = async () => {
+        console.log(" -> Home");
+        const result = await axios.get('http://127.0.0.1:5000//reset-variable-processed', { withCredentials: false });
+        console.log("Logo Pressed:", result.data);
         navigate('/');
     }
 

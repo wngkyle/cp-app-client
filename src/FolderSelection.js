@@ -58,8 +58,10 @@ export default function FolderSelection() {
             navigate('/process-detail');
         }
     }
-    const handleBackButtonPressed = () => {
+    const handleBackButtonPressed = async () => {
         console.log('HOME <- File Upload');
+        const result = await axios.get('http://127.0.0.1:5000//reset-variable-processed', { withCredentials: false });
+        console.log('Back Button Pressed: ', result.data);
         navigate('/');
     }
 
