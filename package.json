@@ -77,16 +77,20 @@
       "build/",
       "node_modules/",
       "public/",
-      "server/",
       "src/",
       "main.js",
       "package.json",
-      "server-dist-mac/"
+      "server-dist-mac/",
+      "server-dist-windows/"
     ],
     "extraResources": [
       {
-        "from": "server-dist/",
+        "from": "server-dist-mac/",
         "to": "server-dist-mac/"
+      },
+      {
+        "from": "server-dist-windows/",
+        "to": "server-dist-windows/"
       }
     ]
   }

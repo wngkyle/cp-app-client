@@ -35,6 +35,17 @@ const showPaths = () => {
     });
 }
 
+const showAppPath = () => {
+    const currAppPath = app.getAppPath();
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Current App Path',
+        message: currAppPath,
+    }).then(result => {
+        console.log('Message Box Result:', result);
+    });
+}
+
 const showFilesInCurrentDirectory = (cwd) => {
     const listOfFiles = readdirSync(cwd);
     let temp = '';
@@ -50,24 +61,28 @@ const showFilesInCurrentDirectory = (cwd) => {
     });
 }
 
+const showDialog = (text) => {
+    dialog.showMessageBox({
+        type: 'info',
+        title: 'Custom Dialog',
+        message: text,
+    }).then(result => {
+        console.log('Message Box Result:', result);
+    });
+}
+
 const flaskServer = (currentWorkingDirectory) => { 
     let scriptPath;
-    if (!app.isPackaged) { // Development Mode
-        if (process.platform === 'win32') { // Windows 
-            scriptPath = 'C:/Users/f0793/Desktop/cp-app-server/server.py';
-            pythonProcess = spawn('python', [scriptPath]);
-            console.log('Win32 : Using Spawn() method...');
-        } else { // Mac
-            scriptPath = `${path.join(currentWorkingDirectory, './../../server/server.py')}`;
-            pythonProcess = spawn('python3', [scriptPath]);
-            console.log('Darwin : Using Spawn() method...');
-        } 
-    } else { // Packaged 
+    showAppPath();
+    if (app.isPackaged) { // Packaged
         if (process.platform === 'win32') { // Windows
-            scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`;
+            // scriptPath = `${path.join(process.resourcesPath, 'server-dist-windows', 'server.exe')}`;
+            showDialog("Packaged Windows");
+            scriptPath = `${path.join(app.getAppPath(), 'win-unpacked', 'resources', 'server-dist-windows', 'server.exe')}`;
             console.log('Win32 : Using ExecFile() method...');
         } else { // Mac
-            scriptPath = `${path.join(process.resourcesPath, 'server-dist', 'server')}`;
+            showDialog("Packaged Mac");
+            scriptPath = `${path.join(process.resourcesPath, 'server-dist-mac', 'server')}`;
             console.log('Darwin : Using ExecFile() method...');
         }
         pythonProcess = execFile(scriptPath, { windowsHide: true }, (err, stdout, stderr) => {
@@ -78,6 +93,18 @@ const flaskServer = (currentWorkingDirectory) => {
             console.log(`Flask stdout: ${stdout}`);
             console.error(`Flask stderr: ${stderr}`);
         });
+    } else { // Development Mode 
+        if (process.platform === 'win32') { // Windows 
+            showDialog("Development Windows");
+            scriptPath = 'C:/Users/f0793/Desktop/cp-app-server/server.py';
+            pythonProcess = spawn('python', [scriptPath]);
+            console.log('Win32 : Using Spawn() method...');
+        } else { // Mac
+            showDialog("Development Mac");
+            scriptPath = `${path.join(currentWorkingDirectory, './../../server/server.py')}`;
+            pythonProcess = spawn('python3', [scriptPath]);
+            console.log('Darwin : Using Spawn() method...');
+        } 
     }
     return pythonProcess;
 }
