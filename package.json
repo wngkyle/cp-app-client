@@ -81,12 +81,12 @@
       "src/",
       "main.js",
       "package.json",
-      "server-dist/"
+      "server-dist-mac/"
     ],
     "extraResources": [
       {
         "from": "server-dist/",
-        "to": "server-dist/"
+        "to": "server-dist-mac/"
       }
     ]
   }
