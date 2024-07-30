@@ -9,7 +9,7 @@ export default function PagePreset({ children }) {
 
     const handleLogoPressed = async () => {
         console.log(" -> Home");
-        const result = await axios.get('http://127.0.0.1:5000//reset-variable-processed', { withCredentials: false });
+        const result = await axios.get('http://127.0.0.1:5000///reset-variable-processed-and-remove-all-processed-folder', { withCredentials: false });
         console.log("Logo Pressed:", result.data);
         navigate('/');
     }

@@ -60,7 +60,7 @@ export default function FolderSelection() {
     }
     const handleBackButtonPressed = async () => {
         console.log('HOME <- File Upload');
-        const result = await axios.get('http://127.0.0.1:5000//reset-variable-processed', { withCredentials: false });
+        const result = await axios.get('http://127.0.0.1:5000///reset-variable-processed-and-remove-all-processed-folder', { withCredentials: false });
         console.log('Back Button Pressed: ', result.data);
         navigate('/');
     }
@@ -142,7 +142,7 @@ export default function FolderSelection() {
         return () => {
             clearInterval(intervalID);
         }
-    }, [])
+    }, []);
     // By passing an empty dependency array, the useEffect() will only run after initial render
     // Passing no dependency array at all, the useEffect() will run after every single render
 
