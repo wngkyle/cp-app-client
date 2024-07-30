@@ -34,7 +34,7 @@
     "electron-pack-mac": "electron-builder --mac",
     "electron-pack-win": "electron-builder --win --x64",
     "preelectron-pack": "react-scripts build",
-    "start-server": "python3 ./../server/server.py"
+    "start-server-mac": "python3 ./../server/server.py"
   },
   "eslintConfig": {
     "extends": [
