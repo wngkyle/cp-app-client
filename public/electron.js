@@ -90,6 +90,7 @@ const flaskServer = (currentWorkingDirectory) => {
         if (process.platform === 'win32') { // Windows
             // showDialog("Packaged Windows");
             scriptPath = `${path.join(process.resourcesPath, 'server-dist-windows', 'server.exe')}`;
+            showDialog(scriptPath);
             console.log('Win32 : Using ExecFile() method...');
         } else { // Mac
             // showDialog("Packaged Mac");
@@ -107,8 +108,8 @@ const flaskServer = (currentWorkingDirectory) => {
     } else { // Development Mode 
         if (process.platform === 'win32') { // Windows 
             // showDialog("Development Windows");
-            scriptPath = 'C:/Users/f0793/Desktop/cp-app-server/server.py';
-            pythonProcess = spawn('python', [scriptPath]);
+            scriptPath = 'C:\\Users\\F0793\\Desktop\\cp-app-server\\server.py'; 
+            pythonProcess = spawn('py', [scriptPath]);
             console.log('Win32 : Using Spawn() method...');
         } else { // Mac
             // showDialog("Development Mac");
